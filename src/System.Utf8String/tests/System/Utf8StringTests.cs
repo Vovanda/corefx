@@ -23,6 +23,38 @@ namespace System.Tests
             Assert.Same(Utf8String.Empty, Utf8String.Empty);
         }
 
+        [Theory]
+        [InlineData(null, null, true)]
+        [InlineData("", null, false)]
+        [InlineData(null, "", false)]
+        [InlineData("hello", null, false)]
+        [InlineData(null, "hello", false)]
+        [InlineData("hello", "hello", true)]
+        [InlineData("hello", "Hello", false)]
+        [InlineData("hello there", "hello", false)]
+        public static void Equality_Ordinal(string aString, string bString, bool expected)
+        {
+            Utf8String a = u8(aString);
+            Utf8String b = u8(bString);
+
+            // Operators
+
+            Assert.Equal(expected, a == b);
+            Assert.NotEqual(expected, a != b);
+
+            // Static methods
+
+            Assert.Equal(expected, Utf8String.Equals(a, b));
+
+            // Instance methods
+
+            if (a != null)
+            {
+                Assert.Equal(expected, a.Equals(b));
+                Assert.Equal(expected, a.Equals((object)b));
+            }
+        }
+
         [Fact]
         public static void GetPinnableReference_CalledMultipleTimes_ReturnsSameValue()
         {

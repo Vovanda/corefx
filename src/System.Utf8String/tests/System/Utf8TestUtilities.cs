@@ -28,7 +28,11 @@ namespace System.Tests
         /// </summary>
         public unsafe static Utf8String u8(string str)
         {
-            if (string.IsNullOrEmpty(str))
+            if (str is null)
+            {
+                return null;
+            }
+            else if (str.Length == 0)
             {
                 return Utf8String.Empty;
             }
