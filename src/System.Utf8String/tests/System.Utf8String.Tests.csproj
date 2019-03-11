@@ -15,6 +15,7 @@
     <Compile Include="Xunit\SpanAssert.cs" />
     <Compile Include="System\Utf8StringTests.cs" />
     <Compile Include="System\Utf8StringTests.Ctor.cs" />
+    <Compile Include="System\Utf8StringTests.Substring.cs" />
     <Compile Include="System\Utf8TestUtilities.cs" />
   </ItemGroup>
 </Project>

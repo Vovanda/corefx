@@ -48,6 +48,26 @@ namespace System
         public override int GetHashCode() => throw null;
         public override string ToString() => throw null;
     }
+    public static partial class Utf8Extensions
+    {
+        public static ReadOnlySpan<byte> AsBytes(this ReadOnlySpan<Char8> text) => throw null;
+        public static ReadOnlySpan<byte> AsBytes(this Utf8String text) => throw null;
+        public static ReadOnlySpan<byte> AsBytes(this Utf8String text, int start) => throw null;
+        public static ReadOnlySpan<byte> AsBytes(this Utf8String text, int start, int length) => throw null;
+        public static ReadOnlySpan<Char8> AsSpan(this Utf8String text) => throw null;
+        public static ReadOnlySpan<Char8> AsSpan(this Utf8String text, int start) => throw null;
+        public static ReadOnlySpan<Char8> AsSpan(this Utf8String text, int start, int length) => throw null;
+        public static ReadOnlyMemory<Char8> AsMemory(this Utf8String text) => throw null;
+        public static ReadOnlyMemory<Char8> AsMemory(this Utf8String text, int start) => throw null;
+        public static ReadOnlyMemory<Char8> AsMemory(this Utf8String text, Index startIndex) => throw null;
+        public static ReadOnlyMemory<Char8> AsMemory(this Utf8String text, int start, int length) => throw null;
+        public static ReadOnlyMemory<Char8> AsMemory(this Utf8String text, Range range) => throw null;
+        public static ReadOnlyMemory<byte> AsMemoryBytes(this Utf8String text) => throw null;
+        public static ReadOnlyMemory<byte> AsMemoryBytes(this Utf8String text, int start) => throw null;
+        public static ReadOnlyMemory<byte> AsMemoryBytes(this Utf8String text, Index startIndex) => throw null;
+        public static ReadOnlyMemory<byte> AsMemoryBytes(this Utf8String text, int start, int length) => throw null;
+        public static ReadOnlyMemory<byte> AsMemoryBytes(this Utf8String text, Range range) => throw null;
+    }
     public sealed partial class Utf8String : IEquatable<Utf8String>
     {
         public static readonly Utf8String Empty;
@@ -82,9 +102,5 @@ namespace System
         public byte[] ToByteArray() => throw null;
         public byte[] ToByteArray(int startIndex, int length) => throw null;
         public override string ToString() => throw null;
-    }
-    public static partial class Utf8StringExtensions
-    {
-        public static ReadOnlySpan<byte> AsBytes(this Utf8String text) => throw null;
     }
 }
