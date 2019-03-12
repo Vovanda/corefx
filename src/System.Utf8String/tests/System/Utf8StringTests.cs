@@ -56,6 +56,24 @@ namespace System.Tests
         }
 
         [Fact]
+        public static void GetHashCode_ReturnsRandomized()
+        {
+            Utf8String a = u8("Hello");
+            Utf8String b = new Utf8String(a.AsBytes());
+
+            Assert.NotSame(a, b);
+            Assert.Equal(a.GetHashCode(), b.GetHashCode());
+
+            Utf8String c = u8("Goodbye");
+            Utf8String d = new Utf8String(c.AsBytes());
+
+            Assert.NotSame(c, d);
+            Assert.Equal(c.GetHashCode(), d.GetHashCode());
+
+            Assert.NotEqual(a.GetHashCode(), c.GetHashCode());
+        }
+
+        [Fact]
         public static void GetPinnableReference_CalledMultipleTimes_ReturnsSameValue()
         {
             var utf8 = u8("Hello!");
@@ -134,6 +152,27 @@ namespace System.Tests
         {
             Utf8String utf8String = u8(value);
             Assert.Throws<ArgumentOutOfRangeException>(exceptionParamName, () => utf8String.ToByteArray(startIndex, length));
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("Hello!")]
+        public static void ToString_ReturnsUtf16(string value)
+        {
+            Assert.Equal(value, u8(value).ToString());
+        }
+
+        [Fact]
+        public static void ToString_ReturnsUtf16_WithFixups()
+        {
+            Utf8String newString = new Utf8String("Hello");
+
+            fixed (byte* pNewString = newString)
+            {
+                pNewString[2] = 0xFF; // corrupt this data
+            }
+
+            Assert.Equal("He\uFFFDlo", newString.ToString());
         }
     }
 }
